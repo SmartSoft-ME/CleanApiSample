@@ -2,7 +2,7 @@
 
 using MediatR;
 
-namespace CleanApiSample.Application.Commands.PostCommands
+namespace CleanApiSample.Application.Commands.UserCommands
 {
     public record DeleteUserCommand(int Id) : ICommand<Unit>;
 }

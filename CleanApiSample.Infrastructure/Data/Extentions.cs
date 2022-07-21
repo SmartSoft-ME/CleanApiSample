@@ -7,11 +7,7 @@ namespace CleanApiSample.Infrastructure.Data
     {
         public static IServiceCollection AddDatabase(this IServiceCollection services)
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            var connectionString = "Data Source=" + Path.Join(path, "CleanAPISample.db");
-            services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString)
-                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
             return services;
         }
     }

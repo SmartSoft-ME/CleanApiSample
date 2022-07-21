@@ -1,6 +1,16 @@
 using System.Text.Json.Serialization;
 
+using CleanApiSample.Application.DTOs;
+using CleanApiSample.Application.Repositories;
+using CleanApiSample.Infrastructure.Data;
+
+using MediatR;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMediatR(typeof(PostDto));
+
+builder.Services.AddDatabase();
 
 builder.Services.AddControllers()
     .AddJsonOptions( o => 

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CleanApiSample.Domain\CleanApiSample.Domain.csproj" />
     <ProjectReference Include="..\CleanApiSample.Shared\CleanApiSample.Shared.csproj" />
   </ItemGroup>

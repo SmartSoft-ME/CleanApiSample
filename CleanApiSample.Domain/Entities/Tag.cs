@@ -25,7 +25,5 @@ namespace CleanApiSample.Domain.Entities
             => Posts.Remove(post);
         public void RemovePosts(List<Post> posts)
             => Posts.RemoveAll(p => posts.Contains(p));
-        public void RemoveAllPosts(List<Post> posts)
-            => Posts.RemoveAll(p => p);
     }
 }

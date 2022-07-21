@@ -1,10 +1,11 @@
-﻿using CleanApiSample.Domain.Entities;
+﻿using CleanApiSample.Application.Repositories;
+using CleanApiSample.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 
 namespace CleanApiSample.Infrastructure.Data.Repositories
 {
-    public class PostRepository : BaseRepository<Post>
+    public class PostRepository : BaseRepository<Post>, IPostRepository
     {
         private readonly AppDbContext _context;
         private readonly DbSet<Post> _posts;

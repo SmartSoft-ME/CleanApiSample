@@ -4,5 +4,5 @@ using MediatR;
 
 namespace CleanApiSample.Application.Commands.PostCommands
 {
-    public record DeleteUserCommand(int Id) : ICommand<Unit>;
+    public record DeletePostCommand(int Id) : ICommand<Unit>;
 }

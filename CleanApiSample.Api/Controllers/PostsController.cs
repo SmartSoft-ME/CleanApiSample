@@ -1,5 +1,6 @@
 ﻿using CleanApiSample.Application.Commands.PostCommands;
 using CleanApiSample.Application.DTOs;
+using CleanApiSample.Application.Queries.PostQueries;
 using CleanApiSample.Shared;
 
 using MediatR;
@@ -20,5 +21,8 @@ namespace CleanApiSample.Api.Controllers
         [HttpPost]
         public async Task<Response<PostDto>> PostPost(CreatePostCommand command, CancellationToken cancellationToken)
             => await _mediator.Send(command, cancellationToken);
+        [HttpGet]
+        public async Task<List<PostDto>> Get(GetAllPostsQuery query, CancellationToken cancellationToken)
+            => await _mediator.Send(query, cancellationToken);
     }
 }

@@ -21,7 +21,8 @@ namespace CleanApiSample.Domain.Entities
             => Username = Username.Create(username);
         public void UpdateEmail(string email)
             => Email = Email.Create(email);
-
+        public void UpdatePosts(List<Post> posts) 
+            => Posts = posts;
         public void AddPost(Post post)
             => Posts.Add(post);
     }

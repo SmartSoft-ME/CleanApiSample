@@ -27,17 +27,20 @@ namespace CleanApiSample.Application.Commands.PostCommands.Handlers
             var (title, description, userId, tagIds) = request;
 
             var user = await _users.GetByIdAsync(userId, cancellationToken);
-            var tags = new List<Tag>();
+            var postTags = new List<Tag>();
 
             foreach (var tagId in tagIds)
             {
-                tags.Add(await _tags.GetByIdAsync(tagId, cancellationToken));
+                postTags.Add(await _tags.GetByIdAsync(tagId, cancellationToken));
             }
 
-            var post = new Post(title, description, user, tags);
-            await _posts.AddAsync(post, cancellationToken);
+            var post = new Post(title, description, user, postTags);
+            var newPost = await _posts.AddAsync(post, cancellationToken);
 
-            return Response.Success(post.Adapt<Post, PostDto>(), "Created post");
+            var setter = TypeAdapterConfig<Post, PostDto>.NewConfig()
+                .Map(dest => dest.Tags, src => src.Tags)
+                .MaxDepth(2);
+            return Response.Success(newPost.Adapt<Post, PostDto>(setter.Config), "Created post " + newPost.Title);
         }
     }
 }

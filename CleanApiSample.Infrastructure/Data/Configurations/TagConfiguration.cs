@@ -9,7 +9,6 @@ namespace CleanApiSample.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Tag> builder)
         {
-            builder.HasMany(t => t.Posts).WithMany(p => p.Tags);
         }
     }
 }

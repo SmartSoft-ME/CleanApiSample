@@ -2,7 +2,6 @@
 using CleanApiSample.Infrastructure.Data.Configurations;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CleanApiSample.Infrastructure.Data
 {

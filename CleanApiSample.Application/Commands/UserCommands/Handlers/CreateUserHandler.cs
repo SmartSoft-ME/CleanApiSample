@@ -21,8 +21,8 @@ namespace CleanApiSample.Application.Commands.UserCommands.Handlers
         {
             var(username, email) = request;
             User user = new(username, email);
-            //var newUser = await _users.AddAsync(user, cancellationToken);
-            return Response.Success(user.Adapt<User, UserDto>(), "Created user " + user.Username);
+            var newUser = await _users.AddAsync(user, cancellationToken);
+            return Response.Success(newUser.Adapt<User, UserDto>(), "Created user " + newUser.Username);
         }
     }
 }

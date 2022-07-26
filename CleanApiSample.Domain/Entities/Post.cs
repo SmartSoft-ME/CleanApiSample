@@ -11,7 +11,8 @@ namespace CleanApiSample.Domain.Entities
         public int UserId { get; private set; }
         public User User { get; private set; }
         public List<Tag>? Tags { get; private set; }
-        
+
+        public Post() { }        
         public Post(string title, string description, User user, List<Tag>? tags)
         {
             Title = title;

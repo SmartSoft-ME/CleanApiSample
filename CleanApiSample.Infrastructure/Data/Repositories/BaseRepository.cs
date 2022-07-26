@@ -18,7 +18,7 @@ namespace CleanApiSample.Infrastructure.Data.Repositories
                            .ToListAsync(cancellationToken);
 
         public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken)
-            => await _dbSet.FindAsync(id, cancellationToken);
+            => await _dbSet.FindAsync(new object?[] { id }, cancellationToken: cancellationToken);
 
         public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken)
         {

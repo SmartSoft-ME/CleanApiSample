@@ -35,6 +35,7 @@ namespace CleanApiSample.Application.Commands.PostCommands.Handlers
             }
 
             var post = new Post(title, description, user, tags);
+            await _posts.AddAsync(post, cancellationToken);
 
             return Response.Success(post.Adapt<Post, PostDto>(), "Created post");
         }

@@ -1,24 +1,24 @@
 ﻿using CleanApiSample.Domain.Entities;
+using CleanApiSample.Infrastructure.Data.Configurations;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CleanApiSample.Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Post> Posts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public string connectionString { get; private set; }
+        public DbSet<Post> Posts { get; set; }
 
-        public AppDbContext()
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            connectionString = "Data Source=" + Path.Join(path, "CleanAPISample.db");
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new TagConfiguration());
+            builder.ApplyConfiguration(new PostConfiguration());
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(connectionString);
-
-
     }
 }

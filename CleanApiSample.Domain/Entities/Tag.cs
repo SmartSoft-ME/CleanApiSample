@@ -7,6 +7,7 @@ namespace CleanApiSample.Domain.Entities
         public string Name { get; private set; }
         public List<Post> Posts { get; private set; }
 
+        public Tag() { }
         public Tag(string name)
         {
             Name = name;

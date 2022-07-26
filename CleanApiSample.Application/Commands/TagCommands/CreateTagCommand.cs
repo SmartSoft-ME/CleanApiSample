@@ -3,5 +3,5 @@ using CleanApiSample.Shared.Abstractions.Application.Commands;
 
 namespace CleanApiSample.Application.Commands.TagCommands
 {
-    public record CreateTagCommand(string Name, List<int> PostIds) : ICommand<TagDto>;
+    public record CreateTagCommand(string Name) : ICommand<TagDto>;
 }

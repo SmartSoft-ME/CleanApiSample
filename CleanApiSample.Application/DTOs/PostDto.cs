@@ -1,4 +1,4 @@
 ﻿namespace CleanApiSample.Application.DTOs
 {
-    public record PostDto(int Id, string Title, string Description, DateTime PostedTime, UserDto User, List<TagDto> Tags);
+    public record PostDto(int Id, string Title, string Description, DateTime PostedDate, UserDto User, List<TagDto> Tags);
 }

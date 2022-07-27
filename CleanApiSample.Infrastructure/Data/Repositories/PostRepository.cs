@@ -16,5 +16,9 @@ namespace CleanApiSample.Infrastructure.Data.Repositories
         }
         public async Task<IEnumerable<Post>> GetWithTagsAsync(CancellationToken cancellationToken)
             => await _posts.Include(p => p.Tags).ToListAsync(cancellationToken);
+
+        public async Task<Post> GetWithTagsByIdAsync(int id, CancellationToken cancellationToken)
+            => await _posts.Include(p => p.Tags).FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+
     }
 }

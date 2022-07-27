@@ -10,7 +10,6 @@ namespace CleanApiSample.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-
             builder.Property(u => u.Username)
                 .HasConversion(un => un.Value, un => Username.Create(un));
             builder.Property(u => u.Email)

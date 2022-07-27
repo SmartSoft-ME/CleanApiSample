@@ -13,6 +13,7 @@ namespace CleanApiSample.Infrastructure.Data.Repositories
             _context = context;
             _dbSet = context.Set<TEntity>();
         }
+
         public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
             => await _dbSet.ToListAsync(cancellationToken);
 

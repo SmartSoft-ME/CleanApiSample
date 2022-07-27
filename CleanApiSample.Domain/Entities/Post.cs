@@ -22,12 +22,14 @@ namespace CleanApiSample.Domain.Entities
             Tags = tags;
         }
 
-        public void UpdateDetails(string? title, string? description, List<Tag>? tags)
+        public void UpdateDetails(string? title, string? description)
         {
             Title = title;
             Description = description;
-            Tags = tags;
         }
+
+        public void UpdateTags(List<Tag> tags)
+            => Tags = tags;
 
         public void AddTag(Tag tag)
             => Tags.Add(tag);

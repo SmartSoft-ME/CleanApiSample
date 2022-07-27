@@ -14,8 +14,7 @@ namespace CleanApiSample.Infrastructure.Data.Repositories
             _dbSet = context.Set<TEntity>();
         }
         public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
-            => await _dbSet.AsNoTracking()
-                           .ToListAsync(cancellationToken);
+            => await _dbSet.ToListAsync(cancellationToken);
 
         public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken)
             => await _dbSet.FindAsync(new object?[] { id }, cancellationToken: cancellationToken);
@@ -30,14 +29,14 @@ namespace CleanApiSample.Infrastructure.Data.Repositories
         public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
             var createdEntity = await _dbSet.AddAsync(entity, cancellationToken);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             return createdEntity.Entity;
         }
 
-        public async Task DeleteAsync(int id, CancellationToken cancellation)
+        public async Task DeleteAsync(int id, CancellationToken cancellationToken)
         {
-            _dbSet.Remove(await _dbSet.FindAsync(id, cancellation));
-            _context.SaveChangesAsync(cancellation);
+            _dbSet.Remove(await _dbSet.FindAsync(new object?[] { id }, cancellationToken: cancellationToken));
+            _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

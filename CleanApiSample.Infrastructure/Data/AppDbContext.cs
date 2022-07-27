@@ -16,8 +16,6 @@ namespace CleanApiSample.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserConfiguration());
-            builder.ApplyConfiguration(new TagConfiguration());
-            builder.ApplyConfiguration(new PostConfiguration());
         }
     }
 }

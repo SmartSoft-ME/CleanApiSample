@@ -8,7 +8,7 @@ using Mapster;
 
 namespace CleanApiSample.Application.Commands.TagCommands.Handlers
 {
-    public class CreateTagHandler : ICommandHandler<CreateTagCommand, TagDto>
+    internal class CreateTagHandler : ICommandHandler<CreateTagCommand, TagDto>
     {
         private readonly ITagRepository _tags;
 

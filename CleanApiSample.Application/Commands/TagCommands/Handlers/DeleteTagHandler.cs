@@ -6,7 +6,7 @@ using MediatR;
 
 namespace CleanApiSample.Application.Commands.TagCommands.Handlers
 {
-    public class DeleteTagHandler : ICommandHandler<DeleteTagCommand, Unit>
+    internal class DeleteTagHandler : ICommandHandler<DeleteTagCommand, Unit>
     {
         private readonly ITagRepository _tags;
 

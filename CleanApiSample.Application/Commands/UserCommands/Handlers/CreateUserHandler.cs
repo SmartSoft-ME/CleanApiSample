@@ -8,7 +8,7 @@ using Mapster;
 
 namespace CleanApiSample.Application.Commands.UserCommands.Handlers
 {
-    public class CreateUserHandler : ICommandHandler<CreateUserCommand, UserDto>
+    internal class CreateUserHandler : ICommandHandler<CreateUserCommand, UserDto>
     {
         private readonly IUserRepository _users;
 

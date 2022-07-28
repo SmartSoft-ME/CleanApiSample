@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanApiSample.Infrastructure.Data.Repositories
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         private readonly AppDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
@@ -37,7 +37,7 @@ namespace CleanApiSample.Infrastructure.Data.Repositories
         public async Task DeleteAsync(int id, CancellationToken cancellationToken)
         {
             _dbSet.Remove(await _dbSet.FindAsync(new object?[] { id }, cancellationToken: cancellationToken));
-            _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -21,6 +21,8 @@ namespace CleanApiSample.Infrastructure.Data
             services.AddDbContext<AppDbContext>(options
                 => options.UseSqlite(connectionString));
 
+            services.AddHostedService<AppInitializer>();
+
             return services;
         }
     }

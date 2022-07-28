@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 
 using CleanApiSample.Application.DTOs;
 using CleanApiSample.Application.Repositories;
+using CleanApiSample.Infrastructure;
 using CleanApiSample.Infrastructure.Data;
 
 using MediatR;
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMediatR(typeof(PostDto));
 
-builder.Services.AddDatabase();
+builder.Services.AddInfrastructure();
 
 builder.Services.AddControllers()
     .AddJsonOptions( o => 
@@ -23,6 +24,7 @@ builder.Services.AddCors();
 
 var app = builder.Build();
 
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -32,6 +34,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors(o => o.AllowAnyHeader().AllowAnyMethod().WithOrigins("*"));
 
 app.UseHttpsRedirection();
+
+app.UseInfrastructure();
 
 app.UseAuthorization();
 

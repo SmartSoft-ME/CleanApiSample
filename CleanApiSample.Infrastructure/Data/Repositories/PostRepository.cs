@@ -5,7 +5,7 @@ using SQLitePCL;
 
 namespace CleanApiSample.Infrastructure.Data.Repositories
 {
-    public class PostRepository : BaseRepository<Post>, IPostRepository
+    internal class PostRepository : BaseRepository<Post>, IPostRepository
     {
         private readonly AppDbContext _context;
         private readonly DbSet<Post> _posts;

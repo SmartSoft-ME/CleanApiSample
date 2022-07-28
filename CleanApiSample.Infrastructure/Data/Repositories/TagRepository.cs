@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanApiSample.Infrastructure.Data.Repositories
 {
-    public class TagRepository : BaseRepository<Tag>, ITagRepository
+    internal class TagRepository : BaseRepository<Tag>, ITagRepository
     {
         private readonly AppDbContext _context;
         private readonly DbSet<Tag> _tags;

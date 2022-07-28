@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanApiSample.Infrastructure.Data.Repositories
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    internal class UserRepository : BaseRepository<User>, IUserRepository
     {
         private readonly AppDbContext _context;
         private readonly DbSet<User> _users;

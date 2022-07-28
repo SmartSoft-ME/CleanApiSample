@@ -11,7 +11,7 @@ using Mapster;
 
 namespace CleanApiSample.Application.Commands.TagCommands.Handlers
 {
-    public class UpdateTagHandler : ICommandHandler<UpdateTagCommand, TagDto>
+    internal class UpdateTagHandler : ICommandHandler<UpdateTagCommand, TagDto>
     {
         private readonly ITagRepository _tags;
         private readonly IPostRepository _posts;

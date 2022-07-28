@@ -7,7 +7,7 @@ using Mapster;
 
 namespace CleanApiSample.Application.Queries.PostQueries.Handlers
 {
-    public class GetPostByIdHandler : IQueryHandler<GetPostByIdQuery, PostDto>
+    internal class GetPostByIdHandler : IQueryHandler<GetPostByIdQuery, PostDto>
     {
         private readonly IPostRepository _posts;
 

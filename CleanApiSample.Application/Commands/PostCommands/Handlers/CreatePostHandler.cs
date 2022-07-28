@@ -9,7 +9,7 @@ using Mapster;
 
 namespace CleanApiSample.Application.Commands.PostCommands.Handlers
 {
-    public class CreatePostHandler : ICommandHandler<CreatePostCommand, PostDto>
+    internal class CreatePostHandler : ICommandHandler<CreatePostCommand, PostDto>
     {
         private readonly IPostRepository _posts;
         private readonly ITagRepository _tags;

@@ -41,6 +41,6 @@ jobs:
 
     - name: Build the sales Docker image
       run: |
-        docker build . -f sales.Api/Dockerfile --tag ghcr.io/smartsoft-me/CleanApiSample:latest
+        docker build . -f CleanApiSample.Api/Dockerfile --tag ghcr.io/smartsoft-me/CleanApiSample:latest
         docker run ghcr.io/smartsoft-me/CleanApiSample:latest -d
         docker push ghcr.io/smartsoft-me/CleanApiSample:latest

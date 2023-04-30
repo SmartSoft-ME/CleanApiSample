@@ -1,4 +1,4 @@
-name: .NET
+name: Master workflow
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -18,15 +17,16 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore CleanApiSample.Api.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build CleanApiSample.Api.sln --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test CleanApiSample.Api.sln --no-build --verbosity normal
       
-  Create-Docker-Image:
+  Build-image-on-remote-Ubuntu:
+    needs: [build]
     name: Build image on remote Ubuntu
-    needs: build
+
     runs-on: ubuntu-latest
 
     steps:
@@ -41,6 +41,6 @@ jobs:
 
     - name: Build the sales Docker image
       run: |
-        docker build . -f CleanApiSample.Api/Dockerfile --tag ghcr.io/smartsoft-me/cleanapisample:latest
-        docker run ghcr.io/smartsoft-me/cleanapisample:latest -d
-        docker push ghcr.io/smartsoft-me/cleanapisample:latest
+        docker build . -f CleanApiSample.Api/Dockerfile --tag ghcr.io/smartsoft-me/clean-api-sample:latest
+        #docker run ghcr.io/smartsoft-me/clean-api-sample:latest
+        docker push ghcr.io/smartsoft-me/clean-api-sample:latest

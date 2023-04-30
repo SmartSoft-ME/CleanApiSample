@@ -20,7 +20,7 @@ namespace CleanApiSample.Application.Queries.PostQueries.Handlers
         {
             var post = await _posts.GetByIdAsync(request.Id, cancellationToken);
             var setter = TypeAdapterConfig<Post, PostDto>.NewConfig()
-                .Map(dest => dest.Tags, src => src.Tags).MaxDepth(2);
+                .Map(dest => dest.TagIds, src => src.Tags).MaxDepth(2);
             return post.Adapt<Post, PostDto>(setter.Config);
         }
     }

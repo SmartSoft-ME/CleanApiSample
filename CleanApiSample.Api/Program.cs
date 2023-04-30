@@ -14,7 +14,7 @@ builder.Services.AddMediatR(typeof(PostDto));
 builder.Services.AddInfrastructure();
 
 builder.Services.AddControllers()
-    .AddJsonOptions( o => 
+    .AddJsonOptions(o =>
         o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -24,12 +24,8 @@ builder.Services.AddCors();
 
 var app = builder.Build();
 
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors(o => o.AllowAnyHeader().AllowAnyMethod().WithOrigins("*"));
 

@@ -17,10 +17,10 @@ namespace CleanApiSample.Application.Queries.PostQueries.Handlers
 
         public async Task<List<PostDto>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
         {
-            var posts = await _posts.GetAllAsync(cancellationToken);
+            var posts = await _posts.GetWithTagsAsync(cancellationToken);
 
             var setter = TypeAdapterConfig<Post, PostDto>.NewConfig()
-                .Map(dest => dest.Tags, src => src.Tags)
+                .Map(dest => dest.TagIds, src => src.Tags.Select(t => t.Id))
                 .MaxDepth(2);
             var postsDTO = posts.Adapt<IEnumerable<Post>, IEnumerable<PostDto>>(setter.Config);
 

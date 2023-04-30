@@ -38,7 +38,7 @@ namespace CleanApiSample.Application.Commands.PostCommands.Handlers
             var newPost = await _posts.AddAsync(post, cancellationToken);
 
             var setter = TypeAdapterConfig<Post, PostDto>.NewConfig()
-                .Map(dest => dest.Tags, src => src.Tags).MaxDepth(2);
+                .Map(dest => dest.TagIds, src => src.Tags).MaxDepth(2);
             return Response.Success(newPost.Adapt<Post, PostDto>(setter.Config), "Created post " + newPost.Title);
         }
     }

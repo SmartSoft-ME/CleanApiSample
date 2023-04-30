@@ -38,7 +38,7 @@ namespace CleanApiSample.Application.Commands.PostCommands.Handlers
             var updatedPost = await _posts.UpdateAsync(post, cancellationToken);
 
             var setter = TypeAdapterConfig<Post, PostDto>.NewConfig()
-                .Map(dest => dest.Tags, src => src.Tags).MaxDepth(2);
+                .Map(dest => dest.TagIds, src => src.Tags.Select(t => t.Id)).MaxDepth(2);
             return Response.Success(updatedPost.Adapt<Post, PostDto>(setter.Config), "Updated post " + updatedPost.Title);
         }
     }

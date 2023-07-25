@@ -10,10 +10,10 @@ namespace CleanApiSample.Domain.Entities
         public DateTime PostedDate { get; private set; }
         public int UserId { get; private set; }
         public User User { get; private set; }
-        public List<Tag>? Tags { get; private set; }
+        public List<Tag> Tags { get; private set; } = new();
 
-        public Post() { }        
-        public Post(string title, string description, User user, List<Tag>? tags)
+        private Post() { }        
+        public Post(string title, string description, User user, List<Tag> tags)
         {
             Title = title;
             Description = description;
@@ -22,7 +22,7 @@ namespace CleanApiSample.Domain.Entities
             Tags = tags;
         }
 
-        public void UpdateDetails(string? title, string? description)
+        public void UpdateDetails(string title, string description)
         {
             Title = title;
             Description = description;

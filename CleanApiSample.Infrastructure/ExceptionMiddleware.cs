@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+using CleanApiSample.Infrastructure.Data.Exceptions;
 using CleanApiSample.Shared;
 using CleanApiSample.Shared.Abstractions.Common;
 
@@ -22,34 +23,55 @@ namespace CleanApiSample.Infrastructure
             {
                 await next(context);
             }
-            catch(Exception ex)
+            catch (NotFoundException ex)
             {
                 context.Response.ContentType = "application/json";
-                context.Response.StatusCode = 400;
-                var response = Response.Error<string>(ex.Message);
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+                
+                var json = JsonSerializer.Serialize(LogAndSerialize(context.Request, ex));
+                await context.Response.WriteAsync(json);
+            }
+            catch (CleanApiSampleException ex)
+            {
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+
+                await context.Response.WriteAsync(LogAndSerialize(context.Request, ex));
+            }
+            catch (Exception ex)
+            {
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
                 _logger.LogError(
                     ex.GetType().Name + ": " + ex.Message +
                     "\nHost: " + context.Request.Host +
-                    " | Path: " + context.Request.Path + 
+                    " | Path: " + context.Request.Path +
                     " | Method: " + context.Request.Method);
 
-                if (ex is not CleanApiSampleException)
-                {
-                    context.Response.StatusCode = 500;
 
-                    _logger.LogError(ex.StackTrace);
-                    if (ex.InnerException is not null)
-                    {
-                        _logger.LogError("Inner Message: " + ex.InnerException.Message);
-                        _logger.LogError("Inner Stacktrace: " + ex.InnerException.StackTrace);
-                    }
-                    response = Response.Error<string>("An internal server error occured.");
+                _logger.LogError(ex.StackTrace);
+                if (ex.InnerException is not null)
+                {
+                    _logger.LogError("Inner Message: " + ex.InnerException.Message);
+                    _logger.LogError("Inner StackTrace: " + ex.InnerException.StackTrace);
                 }
+                var response = Response.Error<string>("An internal server error occured.");
 
                 var json = JsonSerializer.Serialize(response);
                 await context.Response.WriteAsync(json);
             }
+        }
+
+        string LogAndSerialize(HttpRequest request, Exception ex)
+        {
+            _logger.LogError(
+                    ex.GetType().Name + ": " + ex.Message +
+                    "\nHost: " + request.Host +
+                    " | Path: " + request.Path +
+                    " | Method: " + request.Method);
+
+            return JsonSerializer.Serialize(Response.Error<string>(ex.Message));
         }
     }
 }

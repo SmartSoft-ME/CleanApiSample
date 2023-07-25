@@ -1,4 +1,7 @@
 ﻿using CleanApiSample.Application.Repositories;
+using CleanApiSample.Infrastructure.Data.Exceptions;
+using CleanApiSample.Shared.Abstractions.Common;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanApiSample.Infrastructure.Data.Repositories
@@ -18,7 +21,8 @@ namespace CleanApiSample.Infrastructure.Data.Repositories
             => await _dbSet.ToListAsync(cancellationToken);
 
         public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken)
-            => await _dbSet.FindAsync(new object?[] { id }, cancellationToken: cancellationToken);
+            => await _dbSet.FindAsync(new object?[] { id }, cancellationToken: cancellationToken)
+                ?? throw new NotFoundException(typeof(TEntity).Name, id);
 
         public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken)
         {
@@ -36,7 +40,8 @@ namespace CleanApiSample.Infrastructure.Data.Repositories
 
         public async Task DeleteAsync(int id, CancellationToken cancellationToken)
         {
-            _dbSet.Remove(await _dbSet.FindAsync(new object?[] { id }, cancellationToken: cancellationToken));
+            var entity = await GetByIdAsync(id, cancellationToken);
+            _dbSet.Remove(entity);
             await _context.SaveChangesAsync(cancellationToken);
         }
     }

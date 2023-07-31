@@ -19,7 +19,7 @@ namespace CleanApiSample.Application.Queries.UserQueries.Handlers
 
         public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            var user = await _users.GetByIdAsync(request.Id, cancellationToken);
+            var user = await _users.GetWholeByIdAsync(request.Id, cancellationToken);
             return user.Adapt<User, UserDto>();
         }
     }

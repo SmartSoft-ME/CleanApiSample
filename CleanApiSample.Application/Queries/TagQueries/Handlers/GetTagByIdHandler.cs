@@ -18,7 +18,7 @@ namespace CleanApiSample.Application.Queries.TagQueries.Handlers
 
         public async Task<TagDto> Handle(GetTagByIdQuery request, CancellationToken cancellationToken)
         {
-            var tag = await _tags.GetByIdAsync(request.Id, cancellationToken);
+            var tag = await _tags.GetWholeByIdAsync(request.Id, cancellationToken);
             return tag.Adapt<Tag, TagDto>();
         }
     }

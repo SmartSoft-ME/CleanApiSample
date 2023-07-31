@@ -22,7 +22,7 @@ namespace CleanApiSample.Application.Commands.UserCommands.Handlers
         {
             var(id, username, email, postIds) = request;
 
-            var user = await _users.GetByIdAsync(id, cancellationToken);
+            var user = await _users.GetWholeByIdAsync(id, cancellationToken);
 
             var newPosts = new List<Post>();
 

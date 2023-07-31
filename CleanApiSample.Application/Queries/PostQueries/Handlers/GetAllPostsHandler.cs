@@ -17,7 +17,7 @@ namespace CleanApiSample.Application.Queries.PostQueries.Handlers
 
         public async Task<List<PostDto>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
         {
-            var posts = await _posts.GetWithTagsAsync(cancellationToken);
+            var posts = await _posts.GetWholeAsync(cancellationToken);
 
             var setter = TypeAdapterConfig<Post, PostDto>.NewConfig()
                 .Map(dest => dest.TagIds, src => src.Tags.Select(t => t.Id))

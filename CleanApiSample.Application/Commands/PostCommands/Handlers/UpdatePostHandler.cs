@@ -23,7 +23,7 @@ namespace CleanApiSample.Application.Commands.PostCommands.Handlers
         {
             var (id, title, description, tagIds) = request;
 
-            var post = await _posts.GetWithTagsByIdAsync(id, cancellationToken);
+            var post = await _posts.GetWholeByIdAsync(id, cancellationToken);
 
             if (tagIds is not null)
             {

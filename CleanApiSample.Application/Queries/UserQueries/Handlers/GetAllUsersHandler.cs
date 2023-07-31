@@ -18,7 +18,7 @@ namespace CleanApiSample.Application.Queries.UserQueries.Handlers
 
         public async Task<List<UserDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _users.GetAllAsync(cancellationToken);
+            var users = await _users.GetWholeAsync(cancellationToken);
             return users.Adapt<IEnumerable<User>, IEnumerable<UserDto>>().ToList();
         }
     }

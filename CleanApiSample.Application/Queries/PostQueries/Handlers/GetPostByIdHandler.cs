@@ -18,9 +18,9 @@ namespace CleanApiSample.Application.Queries.PostQueries.Handlers
 
         public async Task<PostDto> Handle(GetPostByIdQuery request, CancellationToken cancellationToken)
         {
-            var post = await _posts.GetByIdAsync(request.Id, cancellationToken);
+            var post = await _posts.GetWholeByIdAsync(request.Id, cancellationToken);
             var setter = TypeAdapterConfig<Post, PostDto>.NewConfig()
-                .Map(dest => dest.TagIds, src => src.Tags).MaxDepth(2);
+                .Map(dest => dest.TagIds, src => src.Tags.Select(t => t.Id)).MaxDepth(2);
             return post.Adapt<Post, PostDto>(setter.Config);
         }
     }

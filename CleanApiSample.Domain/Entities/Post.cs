@@ -29,7 +29,12 @@ namespace CleanApiSample.Domain.Entities
         }
 
         public void UpdateTags(List<Tag> tags)
-            => Tags = tags;
+        {
+            Tags.AddRange(tags?.Where(newItem
+                => !Tags.Contains(newItem)) ?? Enumerable.Empty<Tag>());
+            Tags.RemoveAll(oldItem
+                    => !tags?.Contains(oldItem) ?? true);
+        }
 
         public void AddTag(Tag tag)
             => Tags.Add(tag);

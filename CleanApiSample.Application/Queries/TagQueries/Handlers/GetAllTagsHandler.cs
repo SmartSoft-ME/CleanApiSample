@@ -18,7 +18,7 @@ namespace CleanApiSample.Application.Queries.TagQueries.Handlers
 
         public async Task<List<TagDto>> Handle(GetAllTagsQuery request, CancellationToken cancellationToken)
         {
-            var tags = await _tags.GetAllAsync(cancellationToken);
+            var tags = await _tags.GetWholeAsync(cancellationToken);
             return tags.Adapt<IEnumerable<Tag>, IEnumerable<TagDto>>().ToList();
         }
     }

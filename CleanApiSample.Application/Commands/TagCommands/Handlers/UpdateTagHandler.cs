@@ -26,7 +26,7 @@ namespace CleanApiSample.Application.Commands.TagCommands.Handlers
         {
             var (id, name, postIds) = request;
 
-            var tag = await _tags.GetByIdAsync(id, cancellationToken);
+            var tag = await _tags.GetWholeByIdAsync(id, cancellationToken);
 
             var newPosts = new List<Post>();
             foreach (var postId in postIds)

@@ -22,7 +22,7 @@ namespace CleanApiSample.Api.Controllers
         public async Task<List<PostDto>> Get([FromQuery] GetAllPostsQuery query, CancellationToken cancellationToken)
             => await _mediator.Send(query, cancellationToken);
 
-        [HttpGet("{id}")]
+        [HttpGet("byId")]
         public async Task<PostDto> Get([FromQuery] GetPostByIdQuery query, CancellationToken cancellationToken)
             => await _mediator.Send(query, cancellationToken);
 

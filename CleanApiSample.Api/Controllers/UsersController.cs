@@ -22,8 +22,8 @@ namespace CleanApiSample.Api.Controllers
         public async Task<List<UserDto>> Get([FromQuery] GetAllUsersQuery query, CancellationToken cancellationToken)
             => await _mediator.Send(query, cancellationToken);
 
-        [HttpGet("{id}")]
-        public async Task<UserDto> Get([FromHeader] GetUserByIdQuery query, CancellationToken cancellationToken)
+        [HttpGet("byId")]
+        public async Task<UserDto> Get([FromQuery] GetUserByIdQuery query, CancellationToken cancellationToken)
             => await _mediator.Send(query, cancellationToken);
 
         [HttpPost]

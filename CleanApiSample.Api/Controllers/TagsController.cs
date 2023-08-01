@@ -19,11 +19,11 @@ namespace CleanApiSample.Api.Controllers
             => _mediator = mediator;
 
         [HttpGet]
-        public async Task<List<TagDto>> Get([FromHeader] GetAllTagsQuery query, CancellationToken cancellationToken)
+        public async Task<List<TagDto>> Get([FromQuery] GetAllTagsQuery query, CancellationToken cancellationToken)
             => await _mediator.Send(query, cancellationToken);
 
-        [HttpGet("{id}")]
-        public async Task<TagDto> Get([FromHeader] GetTagByIdQuery query, CancellationToken cancellationToken)
+        [HttpGet("byId")]
+        public async Task<TagDto> Get([FromQuery] GetTagByIdQuery query, CancellationToken cancellationToken)
             => await _mediator.Send(query, cancellationToken);
 
         [HttpPost]
